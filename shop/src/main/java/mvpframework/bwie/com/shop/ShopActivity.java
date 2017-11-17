@@ -76,6 +76,7 @@ public class ShopActivity extends AppCompatActivity {
     int count;
 
     private void sum(List<ShopBean.OrderDataBean.CartlistBean> mAllOrderList) {
+        //刚开始把数据化为0
         price = 0;
         count = 0;
         boolean allCheck = true;
@@ -87,8 +88,11 @@ public class ShopActivity extends AppCompatActivity {
                 allCheck = false;
             }
         }
+        //总价价格
         totalprice.setText("总价：" + price);
+        //总数量
         totalnum.setText("共:" + count + "件商品");
+        //判断点击
         if (allCheck) {
             allselect.setTag(2);
             allselect.setChecked(true);
@@ -98,7 +102,7 @@ public class ShopActivity extends AppCompatActivity {
         }
 
     }
-
+    //gson解析
     private void getData() {
         try {
             InputStream inputStream = getAssets().open("shop.json");
@@ -134,11 +138,13 @@ public class ShopActivity extends AppCompatActivity {
         return null;
     }
 
+    //默认为没选中
     boolean select = false;
-
+    //全选点击事件
     @OnClick(R.id.allselect)
     public void onClick() {
         int tag = (Integer) allselect.getTag();
+        //未点击为1     点击为2
         if (tag == 1) {
             allselect.setTag(2);
             select = true;
@@ -146,9 +152,11 @@ public class ShopActivity extends AppCompatActivity {
             allselect.setTag(1);
             select = false;
         }
+        //全选把数据全都加起来
         for (ShopBean.OrderDataBean.CartlistBean bean : mAllOrderList) {
             bean.setCheck(select);
         }
+        //适配器刷新
         adapter.notifyDataSetChanged();
         sum(adapter.getList());
     }

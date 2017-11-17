@@ -58,7 +58,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
         holder.danjia.setText(list.get(position).getPrice() + "");
         holder.customviewid.setEditText(list.get(position).getCount());
         ImageLoader.getInstance().displayImage(list.get(position).getDefaultPic(), holder.shopface, getOption());
-
+        //多选框判断
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +70,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
                 }
             }
         });
+
         holder.customviewid.setListener(new CustomView.ClickListener() {
             @Override
             public void click(int count) {
@@ -80,6 +81,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
                 }
             }
         });
+        //删除
         holder.shopBtnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +103,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
         return list == null ? 0 : list.size();
     }
 
-
+    //控件
     public class IViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.checkbox)
         CheckBox checkbox;
@@ -119,13 +121,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
             ButterKnife.bind(this, itemView);
         }
     }
-
+    //数据
     public List<ShopBean.OrderDataBean.CartlistBean> getList() {
         return list;
     }
 
     CheckBoxListener checkBoxListener;
-
+    //多选框
     public void setCheckBoxListener(CheckBoxListener listener) {
         this.checkBoxListener = listener;
     }
@@ -135,7 +137,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
     }
 
     CustomViewListener listener;
-
+    //另外一个页面的数据
     public void setCustomViewListener(CustomViewListener listener) {
         this.listener = listener;
     }
@@ -159,6 +161,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.IViewHolder> {
         public void del(int position, List<ShopBean.OrderDataBean.CartlistBean> list);
     }
 
+    //imageloader两个参数
     public DisplayImageOptions getOption() {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.mipmap.ic_launcher) //设置图片在下载期间显示的图片

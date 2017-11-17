@@ -30,16 +30,19 @@ public class CustomView extends LinearLayout {
 
     public CustomView(final Context context, AttributeSet attrs) {
         super(context, attrs);
+        //布局规划
         View view = LayoutInflater.from(context).inflate(R.layout.customview, null, false);
         ButterKnife.bind(this, view);
 
-
+        //减号点击
         revserse.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    //点击减号的还剩下几个数在文本框显示
                     String content = editText.getText().toString().trim();
                     int count = Integer.valueOf(content);
+                    //判断是否大于1如果等于1则不在减
                     if (count > 1) {
                         mCount = count - 1;
                         editText.setText(mCount + "");
@@ -53,10 +56,12 @@ public class CustomView extends LinearLayout {
                 }
             }
         });
+        //加号点击事件
         add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    //点击后加一个数
                     String content = editText.getText().toString().trim();
                     int count = Integer.valueOf(content) + 1;
 
@@ -73,7 +78,7 @@ public class CustomView extends LinearLayout {
         });
         addView(view);
     }
-
+    //文本框显示数字
     public void setEditText(int count){
         editText.setText(count+"");
     }
